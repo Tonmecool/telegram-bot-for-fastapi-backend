@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  bot_consumer:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    container_name: "bot-faststream"
+
+    env_file:
+      ../.env
+  
+    ports: 
+      - "${API_PORT}:8000"
+    
+    networks:
+      - backend
+
+    volumes:
+      - ../app/:/app/
+      - ../.env:/app/.env
+
+    command: "faststream run --factory consumers.main:get_app --reload"
+
+networks:
+  backend:
+    external: true

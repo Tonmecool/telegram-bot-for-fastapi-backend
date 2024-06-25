@@ -11,3 +11,12 @@ class ChatListRequestError(ApplicationException):
     @property
     def message(self):
         return 'Chat list request error'
+
+
+class ListenerListRequestError(ApplicationException):
+    status_code: int
+    response_content: str
+
+    @property
+    def message(self):
+        return 'Listener list request error'
