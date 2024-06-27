@@ -25,11 +25,17 @@ async def new_message_subscribtion_handler(
     async with container() as request_container:
         service = await request_container.get(BaseChatWebService)
         listeners = await service.get_chat_listeners(chat_oid=key.decode())
+        chat_info = await service.get_chat_info(chat_oid=key.decode())
 
         bot = await request_container.get(Bot)
 
         for listener in listeners:
             await bot.send_message(
-                chat_id=listener.chat_id,
-                text=message.message_text,
+                chat_id=listener.oid,
+                text=(
+                    f'Сообщение из чата <b>{chat_info.title}</b>'
+                    f'<code>{chat_info.oid}</code>'
+                    f'<blockquote>{message.message_text}</blockquote>'
+                ),
+                parse_mode='HTML',
             )

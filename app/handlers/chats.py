@@ -19,4 +19,25 @@ async def get_all_chats_handler(
         await context.bot.send_message(
             chat_id=update.effective_chat.id,
             text=convert_chats_dtos_to_message(chats=chats),
+            parse_mode='MarkdownV2',
+        )
+
+
+async def set_chat_listener_handler(
+    update: Update,
+    context: ContextTypes.DEFAULT_TYPE
+):
+    container = get_container()
+
+    async with container() as request_container:
+        service = await request_container.get(BaseChatWebService)
+        await service.add_listener(
+            telegram_chat_id=update.effective_chat.id,
+            chat_oid=context.args[0],
+        )
+
+        await context.bot.send_message(
+            chat_id=update.effective_chat.id,
+            text='You connect in chat successfully',
+            parse_mode='MarkdownV2',
         )

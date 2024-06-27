@@ -1,0 +1,22 @@
+version: '3.9'
+
+services:
+  bot:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+
+    container_name: "chats-bot"
+    
+    networks:
+      - backend
+
+    volumes:
+      - ../app/:/app/
+      - ../.env:/app/.env
+
+    command: "python main.py"
+
+networks:
+  backend:
+    external: true
