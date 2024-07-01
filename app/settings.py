@@ -12,9 +12,9 @@ class ProjectSettings(BaseSettings):
     GREETING_TEXT: str = env(
         'GREETING_TEXT',
         default=(
-                'Ку, выбери чат.'
-                '\nПолучить список чатов: /chats. '
-                '\nВыбрать чат: /set_chat <oid чата>.'
+                'Hi, choose a chat'
+                '\nGet a list of chats: /chats. '
+                '\nChoose a chat: /set_chat <oid чата>.'
         )
     )
     WEB_API_BASE_URL: str = env(

@@ -33,8 +33,8 @@ async def new_message_subscribtion_handler(
             await bot.send_message(
                 chat_id=listener.oid,
                 text=(
-                    f'Сообщение из чата <b>{chat_info.title}</b>'
-                    f'<code>{chat_info.oid}</code>'
+                    f'A message from a chat with an Id: (<code>{chat_info.oid}</code>)'    # noqa
+                    f'\nAnd the title: <b>{chat_info.title}</b>'
                     f'<blockquote>{message.message_text}</blockquote>'
                 ),
                 parse_mode='HTML',
